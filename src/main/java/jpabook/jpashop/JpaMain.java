@@ -1,11 +1,6 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.newDomain.Member;
-import jpabook.jpashop.newDomain.Order;
-import jpabook.jpashop.newDomain.OrderItem;
-
 import javax.persistence.*;
-import java.util.List;
 
 // JPA의 모든 데이터는 트랜잭션 안에서 실행해야한다.
 public class JpaMain {
@@ -22,16 +17,13 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member("김태현", "시티", "스트릿", "집코드");
-            em.persist(member);
 
-            Order order = new Order();
-            order.setMember(member);
-            em.persist(order);
+
 
             tx.commit(); // 트렌젝션을 커밋할때 쿼리가 날라간다.
         } catch (Exception e) {
             tx.rollback();
+
         } finally {
             em.close();
         }

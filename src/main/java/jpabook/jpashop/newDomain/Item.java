@@ -19,6 +19,4 @@ public class Item {
     private String name;
 
     private Long price;
-
-    private Long stockquantity;
 }
