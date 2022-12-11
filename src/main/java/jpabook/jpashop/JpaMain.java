@@ -21,40 +21,11 @@ public class JpaMain {
         tx.begin(); // 트랜젝션 시작
 
         try {
-            InvtReprtList invtReprtList = new InvtReprtList();
-            InvtReprt invtReprt = new InvtReprt();
 
-
-            invtReprtList.setStartDt("2022-12-11");
-            invtReprtList.setEndDt("2023-1-11");
-            invtReprtList.setInvtReprt(invtReprt);
-
-            em.persist(invtReprtList);
-
-            InvtReprtErr invtReprtErr = new InvtReprtErr();
-            InvtReprtErr invtReprtErr2 = new InvtReprtErr();
-
-            invtReprt.setName("리츠정보시스템 보고서");
-            invtReprt.setReprtKnd("결산보고서");
-
-            em.persist(invtReprt);
-
-            invtReprtErr.setInvtReprt(invtReprt);
-            invtReprtErr.setErrKnd("임의적 오류");
-            invtReprtErr2.setInvtReprt(invtReprt);
-            invtReprtErr2.setErrKnd("필수적 오류");
-
-            em.persist(invtReprtErr);
-            em.persist(invtReprtErr2);
-
-            em.flush();
-            em.clear();
-
-            InvtReprt invtReprt1 = em.find(InvtReprt.class, 2L);
-            List<InvtReprtErr> invtReprtErrs = invtReprt1.getInvtReprtErrs();
-            for(int i=0; i<invtReprtErrs.size(); i++) {
-                System.out.println("invtReprtErrs = " + invtReprtErrs.get(i).getErrKnd());
-            }
+            InvtReprtList invtReprtList = em.find(InvtReprtList.class, 1L);
+            InvtReprt invtReprt = invtReprtList.getInvtReprt();
+            List<InvtReprtErr> invtReprtErrs = invtReprt.getInvtReprtErrs();
+            System.out.println("invtReprtErrs.size() = " + invtReprtErrs.size());
 
 
             tx.commit(); // 트렌젝션을 커밋할때 쿼리가 날라간다.
