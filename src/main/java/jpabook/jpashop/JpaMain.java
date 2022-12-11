@@ -1,10 +1,10 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.newDomain.Item;
-import jpabook.jpashop.newDomain.Movie;
+import jpabook.jpashop.newDomain.Member;
+import jpabook.jpashop.newDomain.Team;
 
 import javax.persistence.*;
-import java.lang.reflect.Member;
+import java.util.List;
 
 // JPA의 모든 데이터는 트랜잭션 안에서 실행해야한다.
 public class JpaMain {
@@ -20,8 +20,10 @@ public class JpaMain {
         tx.begin(); // 트랜젝션 시작
 
         try {
-
-            em.getReference(Member.class, "1L");
+            Team team = new Team();
+            Team team1 = em.find(Team.class, team.getId());
+            List<Member> members = team1.getMembers();
+            System.out.println("members = " + members);
 
 
             tx.commit(); // 트렌젝션을 커밋할때 쿼리가 날라간다.
