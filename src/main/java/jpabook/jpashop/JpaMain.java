@@ -1,6 +1,10 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.newDomain.Item;
+import jpabook.jpashop.newDomain.Movie;
+
 import javax.persistence.*;
+import java.lang.reflect.Member;
 
 // JPA의 모든 데이터는 트랜잭션 안에서 실행해야한다.
 public class JpaMain {
@@ -17,7 +21,7 @@ public class JpaMain {
 
         try {
 
-
+            em.getReference(Member.class, "1L");
 
 
             tx.commit(); // 트렌젝션을 커밋할때 쿼리가 날라간다.
